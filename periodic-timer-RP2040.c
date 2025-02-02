@@ -34,25 +34,25 @@ bool repeating_timer_callback(struct repeating_timer *t) {
     // Alterna os LEDs de acordo com o estado do semáforo
     switch (estado) {
         case 0:                                                                 // Estado: Vermelho aceso por 3 segundos
-            gpio_put(LED_VERMELHO, 0);                                          // Liga o LED vermelho
-            gpio_put(LED_AMARELO,  1);                                          // Apaga o LED amarelo
-            gpio_put(LED_VERDE,    0);                                          // Apaga o LED verde
+            gpio_put(LED_VERMELHO, 0);                                          // Desliga o LED vermelho
+            gpio_put(LED_AMARELO,  1);                                          // Liga o LED amarelo
+            gpio_put(LED_VERDE,    0);                                          // Desliga o LED verde
             estado = 1;                                                         // Avança para o próximo estado
             add_repeating_timer_ms(3000, repeating_timer_callback, NULL, t);    // Aguarda 3 segundos
             break;
 
         case 1:                                                                 // Estado: Amarelo aceso por 3 segundo
-            gpio_put(LED_VERMELHO, 0);                                          // Apaga o LED vermelho
-            gpio_put(LED_AMARELO,  0);                                          // Liga o LED amarelo
-            gpio_put(LED_VERDE,    1);                                          // Apaga o LED verde
+            gpio_put(LED_VERMELHO, 0);                                          // Desliga o LED vermelho
+            gpio_put(LED_AMARELO,  0);                                          // Desliga o LED amarelo
+            gpio_put(LED_VERDE,    1);                                          // Liga o LED verde
             estado = 2;                                                         // Avança para o próximo estado
             add_repeating_timer_ms(3000, repeating_timer_callback, NULL, t);    // Aguarda 3 segundos
             break;
 
         case 2:                                                                 // Estado: Verde aceso por 3 segundos
-            gpio_put(LED_VERMELHO, 1);                                          // Apaga o LED vermelho
-            gpio_put(LED_AMARELO,  0);                                          // Apaga o LED amarelo
-            gpio_put(LED_VERDE,    0);                                          // Liga o LED verde
+            gpio_put(LED_VERMELHO, 1);                                          // Liga o LED vermelho
+            gpio_put(LED_AMARELO,  0);                                          // Desliga o LED amarelo
+            gpio_put(LED_VERDE,    0);                                          // Desliga o LED verde
             estado = 0;                                                         // Retorna ao primeiro estado
             add_repeating_timer_ms(3000, repeating_timer_callback, NULL, t);    // Aguarda 3 segundos
             break;
@@ -72,8 +72,8 @@ int main() {
     gpio_set_dir(LED_VERDE,    GPIO_OUT);                                       // Define GPIO 13 como saída
 
     gpio_put(LED_VERMELHO, 1);                                                  // Liga o LED vermelho (estado inicial)
-    gpio_put(LED_AMARELO,  0);                                                  // Apaga o LED amarelo
-    gpio_put(LED_VERDE,    0);                                                  // Apaga o LED verde
+    gpio_put(LED_AMARELO,  0);                                                  // Desliga o LED amarelo
+    gpio_put(LED_VERDE,    0);                                                  // Desliga o LED verde
 
     struct repeating_timer timer;                                               // Declaração da estrutura do temporizador
 
